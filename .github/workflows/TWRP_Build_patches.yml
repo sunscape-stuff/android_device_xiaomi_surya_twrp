@@ -135,6 +135,12 @@ jobs:
         repo sync -j$(nproc --all) --force-sync
       working-directory: ${{ steps.pwd.outputs.wsdir }}
 
+    - name: Repopick Patches
+      run: |
+        source build/envsetup.sh
+        repopick 7203
+      working-directory: ${{ steps.pwd.outputs.wsdir }}
+
     - name: Clone device tree
       run: |
         git clone ${{ github.event.inputs.DEVICE_TREE_URL }} -b ${{ github.event.inputs.DEVICE_TREE_BRANCH }} ./${{ github.event.inputs.DEVICE_PATH }}
